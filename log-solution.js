@@ -88,7 +88,7 @@ var asyncLogs = [
   ];
 
 var asyncSortedMerge = function (logs) {
-    // this reduceable function will process incoming logs from the Log Sources
+    // this promisified reduceable function will process incoming logs from the log sources
     function grabMostRecentLogsAsync(memo, log) {
       return new Promise(function (resolve, reject) {
         log.popAsync(function (error, singleLog) {
@@ -108,7 +108,7 @@ var asyncSortedMerge = function (logs) {
 
     function getMostRecentLogs(logs) {
       return new Promise(function (resolve) {
-        // prune out the log sources that are finished
+        // prune out the log sources that finished
         var unfinishedLogSources = logs.filter(function isUnfinished(log) {
           return !log.done;
         });
