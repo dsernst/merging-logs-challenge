@@ -120,7 +120,13 @@ var asyncSortedMerge = function (logs) {
         });
 
       if (unfinishedLogSources.length > 0) {
-        getMostRecentLogs(unfinishedLogSources);
+        try {
+          getMostRecentLogs(unfinishedLogSources);
+        } catch (e) {
+          if (!(e instanceof RangeError)) {
+            console.log(e);
+          }
+        }
       }
     });
   }
